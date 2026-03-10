@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache";
 import type { Store } from "@/types/store";
 import {
   getSupabase,
+  getSupabaseCoupons,
   SUPABASE_STORES_TABLE,
   SUPABASE_COUPONS_TABLE,
 } from "./supabase-server";
@@ -43,8 +44,32 @@ export const getStores = unstable_cache(
   { revalidate: CACHE_REVALIDATE, tags: ["stores"] }
 );
 
-async function getCouponsRaw(): Promise<Store[]> {
-  const supabase = getSupabase();
+function requireSupabaseCoupons() {
+  const supabase = getSupabaseCoupons();
+  if (!supabase) {
+    throw new Error(
+      "Supabase is not configured for coupons. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or COUPONS_SUPABASE_URL and COUPONS_SERVICE_ROLE_KEY in .env"
+    );
+  }
+  return supabase;
+}
+
+/** Returns exact row count from DB (for correct admin total). */
+export async function getCouponsCountFromDb(): Promise<number> {
+  const supabase = getSupabaseCoupons();
+  if (!supabase) return 0;
+  const { count, error } = await supabase
+    .from(SUPABASE_COUPONS_TABLE)
+    .select("id", { count: "exact", head: true });
+  if (error) {
+    console.error("[coupons] count error:", error.message);
+    return 0;
+  }
+  return typeof count === "number" ? count : 0;
+}
+
+export async function getCouponsRaw(): Promise<Store[]> {
+  const supabase = getSupabaseCoupons();
   if (!supabase) return [];
   const { data: rows, error } = await supabase
     .from(SUPABASE_COUPONS_TABLE)
@@ -95,9 +120,10 @@ export async function getCouponById(id: string): Promise<Store | null> {
 }
 
 export async function getCouponsPaginated(
-  options: CouponsPaginatedOptions
+  options: CouponsPaginatedOptions,
+  useFreshData?: boolean
 ): Promise<{ coupons: Store[]; total: number }> {
-  const all = await getCoupons();
+  const all = useFreshData ? await getCouponsRaw() : await getCoupons();
   let list = all;
   if (options.status && options.status !== "all") {
     list = list.filter((c) => (c.status ?? "enable") === options.status);
@@ -115,15 +141,22 @@ export async function getCouponsPaginated(
   if (options.codesFirst) {
     list = [...list].sort((a, b) => (hasCode(b) ? 1 : 0) - (hasCode(a) ? 1 : 0));
   }
-  const total = list.length;
-  if (options.limit <= 0) return { coupons: list, total };
+  const totalFromList = list.length;
+  const useDbCount =
+    useFreshData &&
+    !options.search?.trim() &&
+    options.status !== "enable" &&
+    options.status !== "disable";
+  const total = useDbCount ? await getCouponsCountFromDb() : totalFromList;
+  const totalToUse = typeof total === "number" && total >= 0 ? total : totalFromList;
+  if (options.limit <= 0) return { coupons: list, total: totalToUse };
   const start = (options.page - 1) * options.limit;
   const coupons = list.slice(start, start + options.limit);
-  return { coupons, total };
+  return { coupons, total: totalToUse };
 }
 
 export async function deleteAllCoupons(): Promise<void> {
-  const supabase = requireSupabase();
+  const supabase = requireSupabaseCoupons();
   const { data: rows, error: selectErr } = await supabase
     .from(SUPABASE_COUPONS_TABLE)
     .select("id");
@@ -161,7 +194,7 @@ export async function deleteStore(id: string): Promise<void> {
 }
 
 export async function insertCoupon(coupon: Store): Promise<void> {
-  const supabase = requireSupabase();
+  const supabase = requireSupabaseCoupons();
   const { error } = await supabase
     .from(SUPABASE_COUPONS_TABLE)
     .insert({ id: coupon.id, data: coupon });
@@ -169,7 +202,7 @@ export async function insertCoupon(coupon: Store): Promise<void> {
 }
 
 export async function updateCoupon(id: string, coupon: Store): Promise<void> {
-  const supabase = requireSupabase();
+  const supabase = requireSupabaseCoupons();
   const { error } = await supabase
     .from(SUPABASE_COUPONS_TABLE)
     .update({ data: coupon })
@@ -178,7 +211,7 @@ export async function updateCoupon(id: string, coupon: Store): Promise<void> {
 }
 
 export async function deleteCoupon(id: string): Promise<void> {
-  const supabase = requireSupabase();
+  const supabase = requireSupabaseCoupons();
   const { error } = await supabase
     .from(SUPABASE_COUPONS_TABLE)
     .delete()

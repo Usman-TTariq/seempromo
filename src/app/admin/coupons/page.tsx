@@ -7,7 +7,7 @@ import { parseCSV } from "@/lib/parse-csv";
 import { fetchWithTimeout } from "@/lib/fetch-with-timeout";
 
 const UPLOAD_TIMEOUT_MS = 45000;
-const LOAD_TIMEOUT_MS = 30000;
+const LOAD_TIMEOUT_MS = 25000;
 
 export default function AdminCouponsPage() {
   const [stores, setStores] = useState<Store[]>([]);
@@ -38,15 +38,20 @@ export default function AdminCouponsPage() {
       const [sRes, cRes] = await Promise.all([
         fetchWithTimeout("/api/stores", { cache: "no-store" }, LOAD_TIMEOUT_MS),
         fetchWithTimeout(
-          `/api/coupons?page=${page}&limit=${limit}&status=${statusFilter}&q=${encodeURIComponent(searchQuery.trim())}`,
+          `/api/coupons?page=${page}&limit=${limit}&status=${statusFilter}&q=${encodeURIComponent(searchQuery.trim())}&fresh=1`,
           { cache: "no-store" },
           LOAD_TIMEOUT_MS
         ),
       ]);
-      const sData = await sRes.json();
-      const cData = await cRes.json();
+      const sData = await sRes.json().catch(() => []);
+      const cData = await cRes.json().catch(() => ({}));
       setStores(Array.isArray(sData) ? sData : []);
-      if (cData?.coupons && typeof cData?.total === "number") {
+      if (!cRes.ok) {
+        const errMsg = typeof cData?.error === "string" ? cData.error : "Failed to load coupons.";
+        setMessage({ type: "err", text: errMsg });
+        setCoupons([]);
+        setTotal(0);
+      } else if (cData?.coupons && typeof cData?.total === "number") {
         setCoupons(Array.isArray(cData.coupons) ? cData.coupons : []);
         setTotal(cData.total);
       } else {
@@ -55,7 +60,7 @@ export default function AdminCouponsPage() {
       }
     } catch (e) {
       const msg = e instanceof Error && e.name === "AbortError"
-        ? "Request timed out. Check Supabase connection."
+        ? "Request timed out. Supabase may be unreachable (e.g. Cloudflare 522). Check project not paused and .env."
         : "Failed to load data";
       setMessage({ type: "err", text: msg });
     } finally {
@@ -87,7 +92,11 @@ export default function AdminCouponsPage() {
     if (!confirm("Delete ALL coupons? This cannot be undone.")) return;
     setDeletingAll(true);
     try {
-      const res = await fetch("/api/coupons/delete-all", { method: "POST" });
+      const res = await fetch("/api/coupons/delete-all", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         showMsg("err", data?.error ?? `Failed to delete (${res.status})`);
@@ -581,13 +590,12 @@ export default function AdminCouponsPage() {
           />
         </div>
 
-        {/* Description * */}
+        {/* Description (Optional) */}
         <div>
           <label className="mb-1 block text-sm font-medium text-stone-700">
-            Description *
+            Description (Optional)
           </label>
           <textarea
-            required
             value={form.description ?? ""}
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             placeholder="Coupon or deal description"
