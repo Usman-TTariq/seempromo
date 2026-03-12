@@ -28,6 +28,9 @@ export default function AdminCouponsPage() {
   const [uploadCouponsProgress, setUploadCouponsProgress] = useState<string | null>(null);
   const [deletingAll, setDeletingAll] = useState(false);
   const [syncingSlugs, setSyncingSlugs] = useState(false);
+  const [removingDuplicates, setRemovingDuplicates] = useState(false);
+  const [selectedCouponIds, setSelectedCouponIds] = useState<Set<string>>(new Set());
+  const [deletingSelected, setDeletingSelected] = useState(false);
   const uploadCouponsInputRef = useRef<HTMLInputElement>(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -131,8 +134,16 @@ export default function AdminCouponsPage() {
       e.target.value = "";
       return;
     }
-    const storeByName = (name: string) =>
-      stores.find((s) => (s.name ?? "").trim().toLowerCase() === (name ?? "").trim().toLowerCase());
+    const nameKey = (n: string) => (n ?? "").trim().toLowerCase();
+    const sameNameStores = (name: string) =>
+      stores.filter((s) => nameKey(s.name) === nameKey(name));
+    const getBestStoreByName = (name: string): Store | undefined => {
+      const same = sameNameStores(name);
+      if (same.length === 0) return undefined;
+      const withLogo = same.find((s) => (s.logoUrl ?? "").trim());
+      return withLogo ?? same[0];
+    };
+    const storeByName = (name: string) => getBestStoreByName(name);
     const createdStores = new Map<string, Store>();
     let firstError: string | null = null;
     const BATCH_SIZE = 30;
@@ -353,6 +364,11 @@ export default function AdminCouponsPage() {
       });
       if (!res.ok) throw new Error("Delete failed");
       showMsg("ok", "Coupon deleted");
+      setSelectedCouponIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
       if (editingId === id) resetForm();
       load();
     } catch {
@@ -360,8 +376,78 @@ export default function AdminCouponsPage() {
     }
   };
 
+  const handleDeleteSelected = async () => {
+    if (selectedCouponIds.size === 0) {
+      showMsg("err", "Select one or more coupons first.");
+      return;
+    }
+    if (!confirm(`Delete ${selectedCouponIds.size} selected coupon(s)?`)) return;
+    setDeletingSelected(true);
+    try {
+      for (const id of selectedCouponIds) {
+        await fetch(`/api/coupons?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+      }
+      showMsg("ok", `${selectedCouponIds.size} coupon(s) deleted.`);
+      setSelectedCouponIds(new Set());
+      if (editingId && selectedCouponIds.has(editingId)) resetForm();
+      load();
+    } catch {
+      showMsg("err", "Failed to delete some coupons.");
+    } finally {
+      setDeletingSelected(false);
+    }
+  };
+
+  const handleRemoveDuplicateCoupons = async () => {
+    setRemovingDuplicates(true);
+    try {
+      const res = await fetch("/api/coupons", { cache: "no-store" });
+      const all = await res.json().catch(() => []);
+      const list = Array.isArray(all) ? all : (all?.coupons ?? []);
+      const key = (c: Store) =>
+        `${(c.name ?? "").trim().toLowerCase()}|${(c.couponTitle ?? "").trim().toLowerCase()}|${(c.couponCode ?? "").trim().toLowerCase()}`;
+      const byKey: Record<string, Store[]> = {};
+      for (const c of list) {
+        const k = key(c);
+        if (!byKey[k]) byKey[k] = [];
+        byKey[k].push(c);
+      }
+      const toDelete: Store[] = [];
+      for (const group of Object.values(byKey)) {
+        if (group.length <= 1) continue;
+        toDelete.push(...group.slice(1));
+      }
+      if (toDelete.length === 0) {
+        showMsg("ok", "No duplicate coupons (same store + title + code) found.");
+        setRemovingDuplicates(false);
+        return;
+      }
+      if (!confirm(`Remove ${toDelete.length} duplicate coupon(s)? One per store+title+code will be kept.`)) {
+        setRemovingDuplicates(false);
+        return;
+      }
+      for (const c of toDelete) {
+        await fetch(`/api/coupons?id=${encodeURIComponent(c.id)}`, { method: "DELETE" });
+      }
+      showMsg("ok", `Removed ${toDelete.length} duplicate coupon(s).`);
+      load();
+    } catch {
+      showMsg("err", "Failed to remove duplicates");
+    } finally {
+      setRemovingDuplicates(false);
+    }
+  };
+
   const inputClass =
     "w-full rounded border-2 border-stone-300 bg-white px-3 py-2 text-stone-900 placeholder:text-stone-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 text-sm";
+
+  const getBestStoreForName = (name: string): Store | undefined => {
+    const key = (n: string) => (n ?? "").trim().toLowerCase();
+    const same = stores.filter((s) => key(s.name) === key(name));
+    if (same.length === 0) return undefined;
+    const withLogo = same.find((s) => (s.logoUrl ?? "").trim());
+    return withLogo ?? same[0];
+  };
 
   const showForm = showCreateForm || !!editingId;
 
@@ -408,11 +494,29 @@ export default function AdminCouponsPage() {
           </button>
           <button
             type="button"
+            onClick={handleDeleteSelected}
+            disabled={deletingSelected || selectedCouponIds.size === 0}
+            className="rounded-lg bg-red-500 px-3 py-2 text-xs sm:text-sm font-medium text-white hover:bg-red-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            title={selectedCouponIds.size > 0 ? `Delete ${selectedCouponIds.size} selected` : "Select coupons to delete"}
+          >
+            {deletingSelected ? "Deleting…" : `Delete selected${selectedCouponIds.size > 0 ? ` (${selectedCouponIds.size})` : ""}`}
+          </button>
+          <button
+            type="button"
             onClick={handleDeleteAll}
             disabled={deletingAll}
             className="rounded-lg bg-red-600 px-3 py-2 text-xs sm:text-sm font-medium text-white hover:bg-red-500 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {deletingAll ? "Deleting…" : "Delete All"}
+          </button>
+          <button
+            type="button"
+            onClick={handleRemoveDuplicateCoupons}
+            disabled={removingDuplicates}
+            className="rounded-lg bg-amber-600 px-3 py-2 text-xs sm:text-sm font-medium text-white hover:bg-amber-500 transition-colors disabled:opacity-70"
+            title="Keep one coupon per store+title+code, delete the rest"
+          >
+            {removingDuplicates ? "Removing…" : "Remove duplicate coupons"}
           </button>
           <button
             type="button"
@@ -744,7 +848,18 @@ export default function AdminCouponsPage() {
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50/80">
                   <th className="text-left font-semibold text-slate-700 px-2 sm:px-4 py-2 sm:py-3 w-10">
-                    <input type="checkbox" className="rounded border-slate-300" aria-label="Select all" />
+                    <input
+                      type="checkbox"
+                      className="rounded border-slate-300"
+                      aria-label="Select all"
+                      checked={coupons.length > 0 && coupons.every((c) => selectedCouponIds.has(c.id))}
+                      onChange={(e) => {
+                        if (e.target.checked)
+                          setSelectedCouponIds(new Set(coupons.map((c) => c.id)));
+                        else
+                          setSelectedCouponIds(new Set());
+                      }}
+                    />
                   </th>
                   <th className="text-left font-semibold text-slate-700 px-2 sm:px-4 py-2 sm:py-3">Logo</th>
                   <th className="text-left font-semibold text-slate-700 px-2 sm:px-4 py-2 sm:py-3">Store Name</th>
@@ -759,7 +874,7 @@ export default function AdminCouponsPage() {
               </thead>
               <tbody>
                 {coupons.map((c, i) => {
-                  const store = stores.find((s) => (s.name ?? "").trim() === (c.name ?? "").trim());
+                  const store = getBestStoreForName(c.name ?? "");
                   const logoUrl = store?.logoUrl || c.logoUrl;
                   return (
                   <tr
@@ -769,7 +884,20 @@ export default function AdminCouponsPage() {
                     }`}
                   >
                     <td className="px-4 py-2">
-                      <input type="checkbox" className="rounded border-slate-300" aria-label={`Select ${c.name}`} />
+                      <input
+                        type="checkbox"
+                        className="rounded border-slate-300"
+                        aria-label={`Select ${c.name}`}
+                        checked={selectedCouponIds.has(c.id)}
+                        onChange={(e) => {
+                          setSelectedCouponIds((prev) => {
+                            const next = new Set(prev);
+                            if (e.target.checked) next.add(c.id);
+                            else next.delete(c.id);
+                            return next;
+                          });
+                        }}
+                      />
                     </td>
                     <td className="px-4 py-2">
                       {logoUrl ? (
@@ -803,7 +931,7 @@ export default function AdminCouponsPage() {
                         <button
                           type="button"
                           onClick={() => {
-                            const store = stores.find((s) => (s.name ?? "").trim() === (c.name ?? "").trim());
+                            const store = getBestStoreForName(c.name ?? "");
                             setShowCreateForm(true);
                             setForm({
                               id: c.id,
