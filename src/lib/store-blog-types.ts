@@ -11,5 +11,5 @@ export type StoreBlogContent = {
   intro: string[];
   sections: StoreBlogSection[];
   faqs: StoreBlogFAQ[];
-  ctaLine: string; // e.g. "simply head to Couponro today!"
+  ctaLine: string; // e.g. "simply head to SeemPromo today!"
 };

@@ -39,7 +39,7 @@ export default function FashionOutdoorPost() {
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">Where to Find Codes</h2>
       <p>
-        Find current codes on <Link href="/coupons">Couponro&apos;s coupons</Link> and{" "}
+        Find current codes on <Link href="/coupons">SeemPromo&apos;s coupons</Link> and{" "}
         <Link href="/stores">stores</Link>. Filter by store or category to see fashion and outdoor
         deals. We update and remove expired codes so you always see working offers.
       </p>
@@ -55,7 +55,7 @@ export default function FashionOutdoorPost() {
       <dl className="space-y-4">
         <div>
           <dt className="font-bold text-space">Do fashion and outdoor brands offer coupon codes?</dt>
-          <dd>Yes—many run regular promos. We list verified codes on Couponro so you can copy and use them at checkout.</dd>
+          <dd>Yes—many run regular promos. We list verified codes on SeemPromo so you can copy and use them at checkout.</dd>
         </div>
         <div>
           <dt className="font-bold text-space">Can I use more than one code?</dt>

@@ -86,7 +86,7 @@ export default function StoresGuidePost() {
         />
       </figure>
       <p>
-        Before you buy, check Couponro for the latest codes for that store. Copy the code, add items
+        Before you buy, check SeemPromo for the latest codes for that store. Copy the code, add items
         to your cart, and at checkout paste it into the promo or discount box. Many stores let you
         combine a promo code with in-store or automatic offers—read the terms to maximize savings.
       </p>
@@ -96,7 +96,7 @@ export default function StoresGuidePost() {
       </h2>
       <p>
         The best stores for coupons are the ones that regularly offer working codes and clear
-        terms. Browse <Link href="/stores">Couponro&apos;s stores</Link> to see current deals, and
+        terms. Browse <Link href="/stores">SeemPromo&apos;s stores</Link> to see current deals, and
         use this guide to plan where to shop in 2026. Don&apos;t overpay—find your store, grab a
         code, and save.
       </p>
@@ -107,7 +107,7 @@ export default function StoresGuidePost() {
       <dl className="space-y-4">
         <div>
           <dt className="font-bold text-space">1. Which stores have the best coupon codes?</dt>
-          <dd>Stores like Amazon, Walmart, Target, Best Buy, and major fashion brands often run regular promos. Check Couponro for updated codes by store.</dd>
+          <dd>Stores like Amazon, Walmart, Target, Best Buy, and major fashion brands often run regular promos. Check SeemPromo for updated codes by store.</dd>
         </div>
         <div>
           <dt className="font-bold text-space">2. Can I use more than one coupon per order?</dt>

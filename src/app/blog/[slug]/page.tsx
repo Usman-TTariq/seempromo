@@ -44,7 +44,7 @@ export default async function BlogPostPage({ params }: Props) {
   let content: React.ReactNode;
   if (slug === "stores-coupon-deals-guide-2026") {
     content = <StoresGuidePost />;
-  } else if (slug === "couponro-saving-tips-coupon-codes-guide-2026") {
+  } else if (slug === "seempromo-saving-tips-coupon-codes-guide-2026") {
     content = <CouponroSavingTipsPost />;
   } else if (slug === "touchtunes-coupon-codes-deals-discounts-2026") {
     content = <TouchTunesPost />;
@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <div className="block">
                     <h1><Link href={`/blog/${post.slug}`}>{post.title}</Link></h1>
                     <ul className="add-nav list-inline">
-                      <li>by <Link href="/">Couponro</Link></li>
+                      <li>by <Link href="/">SeemPromo</Link></li>
                       <li><time dateTime={post.date}>{formattedDate}</time></li>
                       <li><Link href="/blog">{post.category}</Link></li>
                     </ul>
@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="col-xs-12">
               <article className="main-post">
                 <nav className="text-sm mb-6" style={{ opacity: 0.8 }} aria-label="Breadcrumb">
-                  <Link href="/" className="hover:underline">Couponro</Link>
+                  <Link href="/" className="hover:underline">SeemPromo</Link>
                   <span className="mx-2">›</span>
                   <Link href="/blog" className="hover:underline">Blog</Link>
                   <span className="mx-2">›</span>

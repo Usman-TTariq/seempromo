@@ -220,7 +220,7 @@ export default function TouchTunesPost() {
       <p>
         So, don&apos;t wait up, get your hand on the latest TouchTunes promo codes and spin your
         favorite songs for less! Don&apos;t waste time on finding valid codes; simply head to{" "}
-        <Link href="/">Couponro</Link> today!
+        <Link href="/">SeemPromo</Link> today!
       </p>
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">

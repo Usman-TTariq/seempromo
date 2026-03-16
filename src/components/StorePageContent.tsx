@@ -175,7 +175,7 @@ export default function StorePageContent({
               How to Use {displayName} Coupon Codes
             </h3>
             <p className="text-rebecca leading-relaxed">
-              Copy the code from Couponro and paste it at checkout on {displayName}&apos;s website to get the discount. Some offers are deal links—click &quot;Get Deal&quot; to go to the store and the offer will apply automatically.
+              Copy the code from SeemPromo and paste it at checkout on {displayName}&apos;s website to get the discount. Some offers are deal links—click &quot;Get Deal&quot; to go to the store and the offer will apply automatically.
             </p>
           </section>
         )}
@@ -185,7 +185,7 @@ export default function StorePageContent({
             How to Never Miss a {displayName} Coupon
           </h3>
           <p className="text-rebecca leading-relaxed">
-            Bookmark this page and check back often. We update {displayName} coupons and deals regularly. You can also visit Couponro&apos;s homepage to see the latest offers from all your favorite stores.
+            Bookmark this page and check back often. We update {displayName} coupons and deals regularly. You can also visit SeemPromo&apos;s homepage to see the latest offers from all your favorite stores.
           </p>
         </section>
 
@@ -389,7 +389,7 @@ function StoreCouponCard({
   const logoUrl = storeLogoUrl || coupon.logoUrl || "";
 
   return (
-    <li className="group rounded-xl border-2 border-rebecca/20 bg-white p-3 sm:p-5 hover:border-rebecca/50 hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+    <li className="group rounded-xl border-2 border-[#34C759]/20 bg-white p-3 sm:p-5 hover:border-[#34C759]/50 hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
       <div className="flex gap-3 sm:gap-4 flex-1 min-w-0">
         <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-almond flex items-center justify-center overflow-hidden p-1">
           {logoUrl ? (
@@ -403,7 +403,7 @@ function StoreCouponCard({
         <div className="min-w-0">
           <h4 className="font-bold text-space text-sm sm:text-base">{title}</h4>
           {coupon.description?.trim() && (
-            <p className="text-xs sm:text-sm text-rebecca mt-0.5 line-clamp-2 sm:line-clamp-none">{coupon.description.trim().slice(0, 120)}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-0.5 line-clamp-2 sm:line-clamp-none">{coupon.description.trim().slice(0, 120)}</p>
           )}
           {coupon.expiry && (
             <p className="text-xs text-slate-500 mt-1">Expires: {coupon.expiry}</p>
@@ -416,15 +416,16 @@ function StoreCouponCard({
           {hasCode ? (
             <>
               <div
-                className="absolute inset-0 bg-white border-l-2 border-dashed border-slate-400 font-mono text-xs sm:text-sm font-semibold text-black select-none rounded-none uppercase flex items-center justify-end pr-1.5"
-                style={{ borderStyle: "dashed" }}
+                className="absolute inset-0 bg-white border-2 border-slate-400 font-mono text-xs sm:text-sm font-semibold text-black select-none rounded-none uppercase flex items-center justify-end pr-1.5"
+                style={{ borderLeftStyle: "dashed", borderRightStyle: "dotted", borderTopStyle: "dotted", borderBottomStyle: "dotted" }}
               >
                 {codeDisplay}
               </div>
               <button
                 type="button"
                 onClick={onOpenPopup}
-                className="absolute left-0 top-0 bottom-0 z-10 w-[calc(100%-3ch)] rounded-none bg-rebecca text-white font-semibold text-xs uppercase tracking-wide px-2 sm:px-3 transition-all duration-200 flex items-center justify-center hover:bg-rebecca/90 hover:-translate-x-3 hover:shadow-md"
+                className="absolute left-0 top-0 bottom-0 z-10 w-[calc(100%-3ch)] rounded-none bg-[#34C759] text-white font-semibold text-xs uppercase tracking-wide pl-3 pr-4 transition-all duration-200 flex items-center justify-center hover:bg-[#2db34d] hover:-translate-x-3 hover:shadow-md"
+                style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)" }}
               >
                 Show Coupon Code
               </button>
@@ -433,7 +434,7 @@ function StoreCouponCard({
             <button
               type="button"
               onClick={onOpenPopup}
-              className="w-full h-full rounded-none bg-rebecca text-white font-semibold text-xs uppercase tracking-wide hover:bg-rebecca/90 transition-colors flex items-center justify-center"
+              className="w-full h-full rounded-none bg-[#34C759] text-white font-semibold text-xs uppercase tracking-wide hover:bg-[#2db34d] transition-colors flex items-center justify-center"
             >
               Get Deal
             </button>

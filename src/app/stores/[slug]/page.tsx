@@ -45,7 +45,7 @@ export async function generateMetadata({
       ? replacer(store.seoMetaDescription.trim()).slice(0, 160)
       : store?.description ||
         storeCoupons[0]?.description ||
-        `Find the latest ${displayName} coupon codes, promo codes, and deals. Save with Couponro.`;
+        `Find the latest ${displayName} coupon codes, promo codes, and deals. Save with SeemPromo.`;
 
   return {
     title,

@@ -38,10 +38,10 @@ export async function sendContactEmail(payload: ContactPayload): Promise<{ ok: t
     return { ok: false, error: "SMTP not configured (SMTP_HOST, SMTP_USER, SMTP_PASS required)" };
   }
 
-  const from = process.env.SMTP_FROM ?? process.env.SMTP_USER ?? "noreply@couponro.com";
+  const from = process.env.SMTP_FROM ?? process.env.SMTP_USER ?? "noreply@seempromo.com";
   const subject = payload.subject
-    ? `[Couponro Contact] ${payload.subject}`
-    : "[Couponro Contact] New message";
+    ? `[SeemPromo Contact] ${payload.subject}`
+    : "[SeemPromo Contact] New message";
 
   const text = [
     `Name: ${payload.name}`,
@@ -60,7 +60,7 @@ export async function sendContactEmail(payload: ContactPayload): Promise<{ ok: t
 
   try {
     await transporter.sendMail({
-      from: typeof from === "string" ? from : "noreply@couponro.com",
+      from: typeof from === "string" ? from : "noreply@seempromo.com",
       to,
       subject,
       text,

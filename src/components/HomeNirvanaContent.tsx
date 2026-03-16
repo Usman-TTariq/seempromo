@@ -66,7 +66,7 @@ export default function HomeNirvanaContent() {
               <div className="col-xs-12">
                 <div className="logo">
                   <Link href="/">
-                    <img className="img-responsive" src="/couponro-logo.svg" alt="Couponro" />
+                    <img className="img-responsive" src="/seempromo-logo.svg" alt="SeemPromo" />
                   </Link>
                 </div>
                 <div id="nav">
@@ -116,7 +116,7 @@ export default function HomeNirvanaContent() {
                             <div className="block">
                               <h3>Featured</h3>
                               <ul className="add-nav list-inline">
-                                <li>by Couponro</li>
+                                <li>by SeemPromo</li>
                                 <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                 <li>Blog</li>
                               </ul>
@@ -131,7 +131,7 @@ export default function HomeNirvanaContent() {
                             <div className="block">
                               <h3>Coupons</h3>
                               <ul className="add-nav list-inline">
-                                <li>by Couponro</li>
+                                <li>by SeemPromo</li>
                                 <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                 <li>Coupons</li>
                               </ul>
@@ -146,7 +146,7 @@ export default function HomeNirvanaContent() {
                             <div className="block">
                               <blockquote className="post-quotes">
                                 <p>&ldquo;Saving tips&rdquo;</p>
-                                <cite title="Couponro">Couponro</cite>
+                                <cite title="SeemPromo">SeemPromo</cite>
                               </blockquote>
                               <ul className="add-nav list-inline">
                                 <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
@@ -162,7 +162,7 @@ export default function HomeNirvanaContent() {
                       <li><a href="https://x.com" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter" /></a></li>
                       <li><a href="https://plus.google.com" target="_blank" rel="noopener noreferrer"><i className="fa fa-google-plus" /></a></li>
                     </ul>
-                    <span className="copyrights" suppressHydrationWarning>&copy; {new Date().getFullYear()} <Link href="/" onClick={closeNav}>Couponro</Link>. All rights reserved.</span>
+                    <span className="copyrights" suppressHydrationWarning>&copy; {new Date().getFullYear()} <Link href="/" onClick={closeNav}>SeemPromo</Link>. All rights reserved.</span>
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function HomeNirvanaContent() {
                                 <div className="block">
                                   <h2><Link href={DEFAULT_BLOG_POST_URL}>Featured</Link></h2>
                                   <ul className="add-nav list-inline">
-                                    <li>by <Link href="/">Couponro</Link></li>
+                                    <li>by <Link href="/">SeemPromo</Link></li>
                                     <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                     <li><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></li>
                                   </ul>
@@ -204,7 +204,7 @@ export default function HomeNirvanaContent() {
                                 <div className="block">
                                   <h2><Link href={DEFAULT_BLOG_POST_URL}>Saving tips</Link></h2>
                                   <ul className="add-nav list-inline">
-                                    <li>by <Link href="/">Couponro</Link></li>
+                                    <li>by <Link href="/">SeemPromo</Link></li>
                                     <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                     <li><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></li>
                                   </ul>
@@ -223,7 +223,7 @@ export default function HomeNirvanaContent() {
                                 <div className="block">
                                   <h2><Link href={DEFAULT_BLOG_POST_URL}>Coupon codes</Link></h2>
                                   <ul className="add-nav list-inline">
-                                    <li>by <Link href="/">Couponro</Link></li>
+                                    <li>by <Link href="/">SeemPromo</Link></li>
                                     <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                     <li><Link href={DEFAULT_BLOG_POST_URL}>Coupons</Link></li>
                                   </ul>
@@ -255,7 +255,7 @@ export default function HomeNirvanaContent() {
                                 <div className="block">
                                   <h2><Link href={DEFAULT_BLOG_POST_URL}>Blog post</Link></h2>
                                   <ul className="add-nav list-inline">
-                                    <li>by <Link href={DEFAULT_BLOG_POST_URL}>Couponro</Link></li>
+                                    <li>by <Link href={DEFAULT_BLOG_POST_URL}>SeemPromo</Link></li>
                                     <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                                     <li><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></li>
                                   </ul>
@@ -281,7 +281,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h2><Link href={DEFAULT_BLOG_POST_URL}>Trending</Link></h2>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href={DEFAULT_BLOG_POST_URL}>Couponro</Link></li>
+                              <li>by <Link href={DEFAULT_BLOG_POST_URL}>SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></li>
                             </ul>
@@ -308,7 +308,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <blockquote className="post-quotes">
                               <p><Link href={DEFAULT_BLOG_POST_URL}>&ldquo;Saving tips &amp; deals&rdquo;</Link></p>
-                              <footer><cite title="Couponro">Couponro</cite></footer>
+                              <footer><cite title="SeemPromo">SeemPromo</cite></footer>
                             </blockquote>
                             <ul className="add-nav list-inline">
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
@@ -331,7 +331,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h3><span>Stores</span></h3>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href="/">Couponro</Link></li>
+                              <li>by <Link href="/">SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><span>Stores</span></li>
                             </ul>
@@ -352,7 +352,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h3><span>Coupons</span></h3>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href="/">Couponro</Link></li>
+                              <li>by <Link href="/">SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><span>Coupons</span></li>
                             </ul>
@@ -378,7 +378,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h2><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></h2>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href="/">Couponro</Link></li>
+                              <li>by <Link href="/">SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></li>
                             </ul>
@@ -404,7 +404,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h2><Link href={FREE_SHIPPING_BLOG_POST_URL}>Free Shipping</Link></h2>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href="/">Couponro</Link></li>
+                              <li>by <Link href="/">SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><Link href={FREE_SHIPPING_BLOG_POST_URL}>Free Shipping</Link></li>
                             </ul>
@@ -425,7 +425,7 @@ export default function HomeNirvanaContent() {
                           <div className="block">
                             <h2><Link href={DEALS_BLOG_POST_URL}>Deals</Link></h2>
                             <ul className="add-nav list-inline">
-                              <li>by <Link href="/">Couponro</Link></li>
+                              <li>by <Link href="/">SeemPromo</Link></li>
                               <li><time dateTime="2026-03-04">Mar 4, 2026</time></li>
                               <li><Link href={DEALS_BLOG_POST_URL}>Coupons</Link></li>
                             </ul>
@@ -448,11 +448,11 @@ export default function HomeNirvanaContent() {
               <aside className="row footer-aside">
                 <div className="col-sm-3 col-xs-12 column social">
                   <div className="footer-logo mb-3">
-                    <Link href="/" aria-label="Couponro Home">
-                      <img className="img-responsive" src="/couponro%20logo%20svg.svg" alt="Couponro" style={{ maxHeight: "56px", width: "auto" }} />
+                    <Link href="/" aria-label="SeemPromo Home">
+                      <img className="img-responsive" src="/seempromo-logo.svg" alt="SeemPromo" style={{ maxHeight: "56px", width: "auto" }} />
                     </Link>
                   </div>
-                  <p>Couponro helps you save with verified coupon codes, promo codes, and free shipping offers from top stores.</p>
+                  <p>SeemPromo helps you save with verified coupon codes, promo codes, and free shipping offers from top stores.</p>
                   <h3><span className="txt"><Link href={DEFAULT_BLOG_POST_URL}>Blog</Link></span></h3>
                   <ul className="social-networks list-inline">
                     <li><a href="#"><i className="fa fa-facebook" /></a></li>
@@ -482,7 +482,7 @@ export default function HomeNirvanaContent() {
                           <span className="btn-instagram"><i className="fa fa-instagram" /></span>
                           <div className="insta-over">
                             <span className="title">{FOOTER_TILE_TITLES[i - 1]}</span>
-                            <h3>Couponro</h3>
+                            <h3>SeemPromo</h3>
                             <time dateTime="2026-03-04">Mar 4, 2026</time>
                           </div>
                         </Link>
@@ -493,7 +493,7 @@ export default function HomeNirvanaContent() {
               </aside>
               <footer id="footer" className="row">
                 <div className="col-xs-12">
-                  <span className="copyrights" suppressHydrationWarning>&copy; {new Date().getFullYear()} <Link href="/">Couponro</Link>. All rights reserved.</span>
+                  <span className="copyrights" suppressHydrationWarning>&copy; {new Date().getFullYear()} <Link href="/">SeemPromo</Link>. All rights reserved.</span>
                   <ul className="footer-nav list-inline">
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/coupons">Coupons</Link></li>

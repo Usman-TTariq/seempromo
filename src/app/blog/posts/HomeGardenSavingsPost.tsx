@@ -47,7 +47,7 @@ export default function HomeGardenSavingsPost() {
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">How to Use Codes</h2>
       <p>
-        Browse <Link href="/stores">Couponro&apos;s stores</Link> and <Link href="/coupons">coupons</Link> for
+        Browse <Link href="/stores">SeemPromo&apos;s stores</Link> and <Link href="/coupons">coupons</Link> for
         home improvement, furniture, and garden deals. Copy the code, add items to your cart, and at
         checkout paste it into the promo box. We list working codes so you can transform your
         space for less.

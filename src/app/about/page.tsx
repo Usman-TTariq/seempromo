@@ -7,7 +7,7 @@ import { DEFAULT_BLOG_POST_URL } from "@/lib/blog-posts";
 export const metadata = {
   title: "About Us",
   description:
-    "Couponro helps you find the best coupon codes, promo codes, and free shipping offers from top stores. Learn more about us.",
+    "SeemPromo helps you find the best coupon codes, promo codes, and free shipping offers from top stores. Learn more about us.",
 };
 
 export default function AboutPage() {
@@ -17,7 +17,7 @@ export default function AboutPage() {
       <main className="flex-1 mx-auto w-full max-w-5xl px-4 sm:px-6 py-8">
         <nav className="text-sm text-slate-600 mb-6" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-rebecca">
-            Couponro
+            SeemPromo
           </Link>
           <span className="mx-2">›</span>
           <span className="text-space font-medium">About Us</span>
@@ -30,13 +30,13 @@ export default function AboutPage() {
           <div className="p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row gap-8 items-center">
             <div className="flex-1">
               <p className="text-rebecca font-semibold text-sm uppercase tracking-wide mb-2">
-                About Couponro
+                About SeemPromo
               </p>
               <h1 id="about-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
                 Your place for coupon codes and deals
               </h1>
               <p className="text-slate-600 leading-relaxed mb-6">
-                Couponro helps you find the best coupon codes, promo codes, and free shipping offers
+                SeemPromo helps you find the best coupon codes, promo codes, and free shipping offers
                 from top stores. Browse by category, discover seasonal deals, and use verified
                 offers with confidence. We update our list regularly so you can save more every time
                 you shop.
@@ -70,7 +70,7 @@ export default function AboutPage() {
 
         <section className="mb-8" aria-labelledby="why-heading">
           <h2 id="why-heading" className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
-            Why use Couponro
+            Why use SeemPromo
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <article className="rounded-2xl bg-white shadow-sm border border-slate-200 p-6">

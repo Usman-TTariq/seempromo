@@ -74,7 +74,7 @@ export default function StoreBlogPost({ title, content, slug = "" }: Props) {
       </h2>
       <p>
         With the right {storeName} coupon codes and deals, you can shop smarter and save more.
-        Keep this guide handy and check <Link href="/stores">Couponro</Link> for the latest {storeName} offers.
+        Keep this guide handy and check <Link href="/stores">SeemPromo</Link> for the latest {storeName} offers.
       </p>
       <p>
         Don&apos;t overpay—grab the latest {storeName} promo codes and save on your next order. {ctaLine}

@@ -38,7 +38,7 @@ export default function KitchenCoffeePost() {
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">Where to Find Codes</h2>
       <p>
-        Find working codes on <Link href="/coupons">Couponro&apos;s coupons</Link> and{" "}
+        Find working codes on <Link href="/coupons">SeemPromo&apos;s coupons</Link> and{" "}
         <Link href="/stores">stores</Link>. We verify and update offers so you pay less on every
         order. Filter by store name to see current kitchen and coffee deals.
       </p>
@@ -54,7 +54,7 @@ export default function KitchenCoffeePost() {
       <dl className="space-y-4">
         <div>
           <dt className="font-bold text-space">Do coffee and kitchen brands offer coupon codes?</dt>
-          <dd>Yes—many direct-to-consumer and retail brands run percentage-off, free shipping, or gift-with-purchase offers. We list verified codes on Couponro.</dd>
+          <dd>Yes—many direct-to-consumer and retail brands run percentage-off, free shipping, or gift-with-purchase offers. We list verified codes on SeemPromo.</dd>
         </div>
         <div>
           <dt className="font-bold text-space">Can I use more than one code per order?</dt>

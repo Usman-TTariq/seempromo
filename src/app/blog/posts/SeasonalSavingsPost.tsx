@@ -34,7 +34,7 @@ export default function SeasonalSavingsPost() {
       <p>
         Major events like Black Friday, Cyber Monday, Prime Day, back-to-school, and holiday sales
         often come with site-wide or category-specific codes. Sign up for store emails or check
-        Couponro before big shopping days so you don&apos;t miss limited-time offers.
+        SeemPromo before big shopping days so you don&apos;t miss limited-time offers.
       </p>
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">How to Plan Ahead</h2>
@@ -47,7 +47,7 @@ export default function SeasonalSavingsPost() {
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">Final Verdict</h2>
       <p>
         Seasonal savings stack when you combine sale prices with working coupon codes. Browse{" "}
-        <Link href="/coupons">Couponro&apos;s deals</Link> and <Link href="/stores">stores</Link> for
+        <Link href="/coupons">SeemPromo&apos;s deals</Link> and <Link href="/stores">stores</Link> for
         verified codes and plan your 2026 shopping around the biggest sale windows.
       </p>
 

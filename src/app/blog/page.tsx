@@ -6,7 +6,7 @@ import { getPosts, BLOG_CATEGORIES } from "@/lib/blog-posts";
 export const metadata = {
   title: "Blog – Saving Tips & Guides",
   description:
-    "Read Couponro's blog for saving tips, shopping guides, and the latest deals. Learn how to save more with coupons and promo codes.",
+    "Read SeemPromo's blog for saving tips, shopping guides, and the latest deals. Learn how to save more with coupons and promo codes.",
 };
 
 function formatDate(iso: string) {
@@ -34,7 +34,7 @@ export default function BlogPage() {
       <Header />
       <main className="flex-1 mx-auto w-full max-w-6xl px-4 sm:px-6 py-8">
         <h1 className="text-3xl md:text-4xl font-bold text-space mb-2 tracking-tight">
-          Couponro Blog
+          SeemPromo Blog
         </h1>
         <p className="text-rebecca/90 mb-8">
           Saving tips, store guides, and the latest deals.
@@ -73,7 +73,7 @@ export default function BlogPage() {
                   {featured.title}
                 </h3>
                 <p className="text-rebecca text-sm mb-3">
-                  by <Link href="/" className="hover:underline">Couponro</Link>
+                  by <Link href="/" className="hover:underline">SeemPromo</Link>
                   {" · "}
                   <time dateTime={featured.date}>{formatDate(featured.date)}</time>
                   {" · "}
@@ -121,7 +121,7 @@ export default function BlogPage() {
                       {post.title}
                     </h3>
                     <p className="text-rebecca text-xs">
-                      by <Link href="/" className="hover:underline">Couponro</Link>
+                      by <Link href="/" className="hover:underline">SeemPromo</Link>
                       {" · "}
                       <time dateTime={post.date}>{formatDate(post.date)}</time>
                       {" · "}

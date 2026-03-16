@@ -39,7 +39,7 @@ export default function TravelGetawayPost() {
 
       <h2 className="text-2xl font-bold text-space mt-10 mb-4">Where to Find Codes</h2>
       <p>
-        Check <Link href="/coupons">Couponro&apos;s deals</Link> and <Link href="/stores">stores</Link> for
+        Check <Link href="/coupons">SeemPromo&apos;s deals</Link> and <Link href="/stores">stores</Link> for
         current codes on travel and outdoor brands. Filter by category or store name to find the
         right offer. We update and remove expired codes regularly.
       </p>
@@ -55,7 +55,7 @@ export default function TravelGetawayPost() {
       <dl className="space-y-4">
         <div>
           <dt className="font-bold text-space">Do travel and outdoor brands offer coupon codes?</dt>
-          <dd>Yes—many luggage, apparel, and outdoor brands run promo codes and sales. We list working codes on Couponro.</dd>
+          <dd>Yes—many luggage, apparel, and outdoor brands run promo codes and sales. We list working codes on SeemPromo.</dd>
         </div>
         <div>
           <dt className="font-bold text-space">Where do I enter the code?</dt>

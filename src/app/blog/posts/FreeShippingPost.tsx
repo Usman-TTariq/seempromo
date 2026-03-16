@@ -67,7 +67,7 @@ export default function FreeShippingPost() {
       <p>Ways to score free shipping in 2026:</p>
       <ul>
         <li><strong>Minimum order:</strong> Add items to reach the store&apos;s free-shipping threshold (often $35–$75).</li>
-        <li><strong>Promo codes:</strong> Use a code that waives shipping—check <Link href="/freeshipping">Couponro&apos;s Free Shipping</Link> page for current codes.</li>
+        <li><strong>Promo codes:</strong> Use a code that waives shipping—check <Link href="/freeshipping">SeemPromo&apos;s Free Shipping</Link> page for current codes.</li>
         <li><strong>Memberships:</strong> Amazon Prime, Walmart+, and store loyalty programs often include free delivery.</li>
         <li><strong>Pickup:</strong> Order online and pick up in store to avoid shipping fees at many retailers.</li>
       </ul>

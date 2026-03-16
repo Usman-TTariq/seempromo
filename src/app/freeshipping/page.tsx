@@ -207,10 +207,10 @@ export default function FreeShippingPage() {
                         type="button"
                         onClick={() => setPage((p) => Math.max(1, p - 1))}
                         disabled={safePage <= 1}
-                        className="rounded-xl border-2 border-rebecca/30 bg-white px-4 py-2.5 text-sm font-semibold text-space hover:bg-almond disabled:opacity-50 disabled:pointer-events-none transition-colors"
+                        className="rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 disabled:opacity-50 disabled:pointer-events-none transition-colors shadow-sm"
                         aria-label="Previous page"
                       >
-                        ← Prev
+                        ←
                       </button>
                       {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                         const p = totalPages <= 5 ? i + 1 : Math.max(1, Math.min(safePage - 2, totalPages - 4)) + i;
@@ -220,10 +220,10 @@ export default function FreeShippingPage() {
                             key={p}
                             type="button"
                             onClick={() => setPage(p)}
-                            className={`min-w-[2.5rem] rounded-xl px-3 py-2.5 text-sm font-semibold transition-all ${
+                            className={`min-w-[2.5rem] rounded-full px-3 py-2.5 text-sm font-semibold transition-all ${
                               safePage === p
-                                ? "bg-rebecca text-white shadow-md"
-                                : "border-2 border-rebecca/25 bg-white text-space hover:bg-almond"
+                                ? "bg-[#34C759] text-white shadow-md border border-[#34C759]"
+                                : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-400"
                             }`}
                           >
                             {p}
@@ -234,10 +234,10 @@ export default function FreeShippingPage() {
                         type="button"
                         onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                         disabled={safePage >= totalPages}
-                        className="rounded-xl border-2 border-rebecca/30 bg-white px-4 py-2.5 text-sm font-semibold text-space hover:bg-almond disabled:opacity-50 disabled:pointer-events-none transition-colors"
+                        className="rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 disabled:opacity-50 disabled:pointer-events-none transition-colors shadow-sm"
                         aria-label="Next page"
                       >
-                        Next →
+                        →
                       </button>
                     </div>
                   )}

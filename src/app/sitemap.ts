@@ -3,7 +3,7 @@ import { getStores, getCoupons } from "@/lib/stores";
 import { slugify } from "@/lib/slugify";
 import { getAllSlugs } from "@/lib/blog-posts";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://couponro.com";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://seempromo.com";
 const baseUrl = BASE.replace(/\/$/, "");
 
 /**

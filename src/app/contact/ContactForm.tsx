@@ -48,7 +48,7 @@ function ContactFormInner() {
             name="name"
             type="text"
             required
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-rebecca focus:ring-2 focus:ring-rebecca/20 outline-none transition"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#34C759] focus:ring-2 focus:ring-[#34C759]/20 outline-none transition"
             placeholder="Your name"
           />
         </div>
@@ -61,7 +61,7 @@ function ContactFormInner() {
             name="email"
             type="email"
             required
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-rebecca focus:ring-2 focus:ring-rebecca/20 outline-none transition"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#34C759] focus:ring-2 focus:ring-[#34C759]/20 outline-none transition"
             placeholder="your@email.com"
           />
         </div>
@@ -74,7 +74,7 @@ function ContactFormInner() {
             name="subject"
             type="text"
             defaultValue={isShare ? "Share a coupon" : ""}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-rebecca focus:ring-2 focus:ring-rebecca/20 outline-none transition"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#34C759] focus:ring-2 focus:ring-[#34C759]/20 outline-none transition"
             placeholder="e.g. Question, Share a coupon, Feedback"
           />
         </div>
@@ -87,7 +87,7 @@ function ContactFormInner() {
             name="message"
             required
             rows={5}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-rebecca focus:ring-2 focus:ring-rebecca/20 outline-none transition resize-y"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#34C759] focus:ring-2 focus:ring-[#34C759]/20 outline-none transition resize-y"
             placeholder="Your message or coupon details..."
           />
         </div>
@@ -97,7 +97,7 @@ function ContactFormInner() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="rounded-xl bg-space text-white font-semibold px-6 py-3 hover:bg-slate-800 disabled:opacity-60 transition-colors"
+          className="rounded-full bg-[#34C759] text-white font-semibold px-6 py-3 hover:bg-[#2db34d] disabled:opacity-60 transition-colors"
         >
           {status === "sending" ? "Sending…" : "Send message"}
         </button>
@@ -115,9 +115,9 @@ function ContactFormInner() {
             className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-green-100 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-[#34C759]/10 flex items-center justify-center">
               <svg
-                className="w-8 h-8 text-green-600"
+                className="w-8 h-8 text-[#34C759]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ function ContactFormInner() {
             <button
               type="button"
               onClick={() => setShowThankYou(false)}
-              className="rounded-xl bg-rebecca text-white font-semibold px-6 py-3 hover:opacity-90 transition-opacity w-full sm:w-auto min-w-[140px]"
+              className="rounded-full bg-[#34C759] text-white font-semibold px-6 py-3 hover:bg-[#2db34d] transition-colors w-full sm:w-auto min-w-[140px]"
             >
               Close
             </button>

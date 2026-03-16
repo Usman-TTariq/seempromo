@@ -12,7 +12,7 @@ export type BlogPostMeta = {
 };
 
 /** Default blog post URL – use this when "Blog" link should open the main post directly (not listing). */
-export const DEFAULT_BLOG_POST_SLUG = "couponro-saving-tips-coupon-codes-guide-2026";
+export const DEFAULT_BLOG_POST_SLUG = "seempromo-saving-tips-coupon-codes-guide-2026";
 export const DEFAULT_BLOG_POST_URL = `/blog/${DEFAULT_BLOG_POST_SLUG}`;
 
 /** Blog URLs for home page Stores and Coupons cards. */
@@ -127,7 +127,7 @@ const POSTS: BlogPostMeta[] = [
     featuredImage: "/img05.jpg",
   },
   {
-    slug: "couponro-saving-tips-coupon-codes-guide-2026",
+    slug: "seempromo-saving-tips-coupon-codes-guide-2026",
     title: "How to Save More with Coupon Codes & Deals (Complete Guide 2026)",
     metaTitle: "How to Save More with Coupon Codes & Deals – Complete Guide 2026",
     metaDescription:
@@ -165,7 +165,7 @@ const POSTS: BlogPostMeta[] = [
   {
     slug: "fresh-finds-saving-tips-2026",
     title: "Fresh Finds & Saving Tips (Guide 2026)",
-    metaTitle: "Fresh Finds & Saving Tips – Couponro Guide 2026",
+    metaTitle: "Fresh Finds & Saving Tips – SeemPromo Guide 2026",
     metaDescription: "Save on fresh finds and everyday essentials with verified coupon codes and deals in 2026.",
     excerpt: "Get the best deals on groceries and fresh finds. Verified codes and tips to save more.",
     date: "2026-03-04",
@@ -195,7 +195,7 @@ const POSTS: BlogPostMeta[] = [
   {
     slug: "travel-getaway-deals-2026",
     title: "Travel & Getaway Deals (Guide 2026)",
-    metaTitle: "Travel & Getaway Deals – Couponro Guide 2026",
+    metaTitle: "Travel & Getaway Deals – SeemPromo Guide 2026",
     metaDescription: "Find travel and getaway deals with verified coupon codes. Save on gear and bookings in 2026.",
     excerpt: "Deals for travel and outdoor getaways. Working codes for gear and more.",
     date: "2026-03-04",
@@ -215,7 +215,7 @@ const POSTS: BlogPostMeta[] = [
   {
     slug: "fashion-outdoor-deals-2026",
     title: "Fashion & Outdoor Deals (Guide 2026)",
-    metaTitle: "Fashion & Outdoor Deals – Couponro Guide 2026",
+    metaTitle: "Fashion & Outdoor Deals – SeemPromo Guide 2026",
     metaDescription: "Save on fashion and outdoor gear with verified coupon codes and deals in 2026.",
     excerpt: "Deals on fashion and outdoor apparel. Working codes from top brands.",
     date: "2026-03-04",

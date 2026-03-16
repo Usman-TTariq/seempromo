@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const SITE_NAME = "Couponro";
+const SITE_NAME = "SeemPromo";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -11,16 +11,16 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 const DEFAULT_DESCRIPTION =
-  "Couponro – Find the best coupon codes, deals, and free shipping offers from top stores. Save money on your shopping with verified discounts and promo codes.";
+  "SeemPromo – Find the best coupon codes, deals, and free shipping offers from top stores. Save money on your shopping with verified discounts and promo codes.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://couponro.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://seempromo.com"),
   title: {
     default: `${SITE_NAME} – Coupon Codes, Deals & Free Shipping`,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: ["coupon codes", "promo codes", "deals", "discounts", "free shipping", "savings", "Couponro"],
+  keywords: ["coupon codes", "promo codes", "deals", "discounts", "free shipping", "savings", "SeemPromo"],
   openGraph: {
     title: `${SITE_NAME} – Coupon Codes, Deals & Free Shipping`,
     description: DEFAULT_DESCRIPTION,

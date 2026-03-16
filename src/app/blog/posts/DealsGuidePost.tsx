@@ -63,7 +63,7 @@ export default function DealsGuidePost() {
           unoptimized
         />
       </figure>
-      <p>Common deal types on Couponro:</p>
+      <p>Common deal types on SeemPromo:</p>
       <ul>
         <li><strong>Percentage off:</strong> 10%, 20%, or more off your order with a single code.</li>
         <li><strong>Dollar off:</strong> Fixed discount (e.g. $10 off $50) for a minimum spend.</li>
@@ -85,7 +85,7 @@ export default function DealsGuidePost() {
         <Link href="/coupons">Final Verdict</Link>
       </h2>
       <p>
-        Don&apos;t overpay. Browse <Link href="/coupons">Couponro&apos;s deals</Link> before you buy,
+        Don&apos;t overpay. Browse <Link href="/coupons">SeemPromo&apos;s deals</Link> before you buy,
         use a verified code at checkout, and combine with <Link href="/freeshipping">free
         shipping</Link> when you can. Small steps add up to real savings in 2026.
       </p>

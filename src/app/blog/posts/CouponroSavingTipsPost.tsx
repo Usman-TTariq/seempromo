@@ -6,7 +6,7 @@ const IMG2 = "/undefined-9.png";
 const IMG3 = "/undefined-10.png";
 const IMG4 = "/undefined-11.png";
 
-export default function CouponroSavingTipsPost() {
+export default function SeemPromoSavingTipsPost() {
   return (
     <article className="prose prose-slate max-w-none prose-headings:text-space prose-a:text-rebecca prose-a:no-underline hover:prose-a:underline">
       <h1 className="text-3xl sm:text-4xl font-bold text-space mb-6">
@@ -16,7 +16,7 @@ export default function CouponroSavingTipsPost() {
       <p>
         Shopping online does not have to burn a hole in your pocket. With the right coupon codes and
         deals, you can cut costs on everything from groceries to gadgets. This guide walks you through
-        how to find working promo codes, stack discounts, and make the most of sites like Couponro so
+        how to find working promo codes, stack discounts, and make the most of sites like SeemPromo so
         you pay less in 2026.
       </p>
       <p>
@@ -56,7 +56,7 @@ export default function CouponroSavingTipsPost() {
       </p>
       <p>
         Using a verified coupon code is quick: copy the code, paste it at checkout, and see your total
-        drop. On Couponro we keep our list updated and remove expired codes so you do not waste time
+        drop. On SeemPromo we keep our list updated and remove expired codes so you do not waste time
         on ones that no longer work.
       </p>
 
@@ -111,7 +111,7 @@ export default function CouponroSavingTipsPost() {
       </p>
       <ul>
         <li>
-          <strong>Check Couponro before every purchase:</strong> We update codes regularly and remove
+          <strong>Check SeemPromo before every purchase:</strong> We update codes regularly and remove
           expired ones. Browse by store or category to find the right offer.
         </li>
         <li>
@@ -135,7 +135,7 @@ export default function CouponroSavingTipsPost() {
       <ul>
         <li>Compare code value (e.g. 15% off vs $10 off) before applying.</li>
         <li>Stack codes only when the store allows it; read the terms.</li>
-        <li>Bookmark your favorite stores on Couponro and check back before you buy.</li>
+        <li>Bookmark your favorite stores on SeemPromo and check back before you buy.</li>
         <li>Use our store guides and blog for store-specific tips and verified offers.</li>
       </ul>
 
@@ -144,7 +144,7 @@ export default function CouponroSavingTipsPost() {
       </h2>
       <p>
         With the right coupon codes and a bit of planning, you can shop smarter and save more. Keep
-        this guide handy and check <Link href="/">Couponro</Link> for the latest deals and store
+        this guide handy and check <Link href="/">SeemPromo</Link> for the latest deals and store
         guides. Do not overpay—grab the latest promo codes and save on your next order.
       </p>
 
@@ -165,11 +165,11 @@ export default function CouponroSavingTipsPost() {
           <dd>Many do; it varies by offer. Read the code terms to see if it applies to sale items.</dd>
         </div>
         <div>
-          <dt className="font-bold text-space">4. How often are new codes added on Couponro?</dt>
+          <dt className="font-bold text-space">4. How often are new codes added on SeemPromo?</dt>
           <dd>We update our list regularly. New codes appear during sales, holidays, and when stores run promotions.</dd>
         </div>
         <div>
-          <dt className="font-bold text-space">5. Are the codes on Couponro verified?</dt>
+          <dt className="font-bold text-space">5. Are the codes on SeemPromo verified?</dt>
           <dd>We list working, tested offers and remove expired or invalid codes so you can shop with confidence.</dd>
         </div>
       </dl>

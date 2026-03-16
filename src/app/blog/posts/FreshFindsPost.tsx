@@ -41,7 +41,7 @@ export default function FreshFindsPost() {
         <Link href="/stores">Where to Find Codes</Link>
       </h2>
       <p>
-        Check <Link href="/coupons">Couponro&apos;s coupons</Link> and <Link href="/stores">stores</Link> for
+        Check <Link href="/coupons">SeemPromo&apos;s coupons</Link> and <Link href="/stores">stores</Link> for
         current deals on groceries and household items. We update codes regularly and remove
         expired ones so you get working offers. You can filter by store or category to find the
         right code quickly.
