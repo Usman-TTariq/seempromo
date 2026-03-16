@@ -53,7 +53,7 @@ export default function Header() {
             <img
               src="/seempromo-logo.svg"
               alt="SeemPromo"
-              className="h-9 sm:h-10 w-auto object-contain max-w-[160px] sm:max-w-[200px]"
+              className="h-11 sm:h-12 w-auto object-contain max-w-[200px] sm:max-w-[240px]"
             />
           </Link>
 
