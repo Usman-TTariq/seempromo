@@ -3,6 +3,15 @@ import "./globals.css";
 
 const SITE_NAME = "SeemPromo";
 
+function getMetadataBase(): URL {
+  const base = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://seempromo.com";
+  try {
+    return new URL(base);
+  } catch {
+    return new URL("https://seempromo.com");
+  }
+}
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -14,7 +23,7 @@ const DEFAULT_DESCRIPTION =
   "SeemPromo – Find the best coupon codes, deals, and free shipping offers from top stores. Save money on your shopping with verified discounts and promo codes.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://seempromo.com"),
+  metadataBase: getMetadataBase(),
   title: {
     default: `${SITE_NAME} – Coupon Codes, Deals & Free Shipping`,
     template: `%s | ${SITE_NAME}`,

@@ -6,27 +6,29 @@ export const metadata = {
   robots: "noindex, nofollow",
 };
 
-const studioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL?.trim() || null;
-const isDev = process.env.NODE_ENV === "development";
-const localStudioUrl = "http://localhost:3333/studio";
+function getStudioUrl(): string | null {
+  const raw = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL?.trim();
+  if (!raw) return null;
+  try {
+    const u = new URL(raw);
+    return u.origin && (u.protocol === "https:" || u.protocol === "http:") ? raw : null;
+  } catch {
+    return null;
+  }
+}
 
 export default function StudioPage() {
-  // Local par: /studio kholte hi seedha Studio (3333) khol do
-  if (isDev) {
-    redirect(localStudioUrl);
-  }
-  // Live par: agar deployed Studio URL set hai to wahi khol do
+  const studioUrl = getStudioUrl();
   if (studioUrl) {
     redirect(studioUrl);
   }
 
-  // Live par URL na ho to fallback: deploy/local instructions
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-100 px-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center">
         <h1 className="text-xl font-bold text-slate-800 mb-2">Sanity Studio</h1>
         <p className="text-slate-600 text-sm mb-6">
-          Studio abhi is URL par set nahi. Neeche se local chalao ya deploy karke URL set karo.
+          Studio.
         </p>
         <div className="bg-slate-50 rounded-xl p-4 text-left text-sm text-slate-700 font-mono mb-6">
           <p className="font-semibold text-slate-800 mb-2">Local par chalane ke liye:</p>
