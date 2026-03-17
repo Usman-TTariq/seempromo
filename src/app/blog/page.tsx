@@ -2,11 +2,20 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getPosts, BLOG_CATEGORIES } from "@/lib/blog-posts";
+import { getSanityPosts } from "@/lib/sanity.blog";
+
+const SITE_NAME = "SeemPromo";
 
 export const metadata = {
-  title: "Blog – Saving Tips & Guides",
+  title: "Blog – Saving Tips & Guides | " + SITE_NAME,
   description:
     "Read SeemPromo's blog for saving tips, shopping guides, and the latest deals. Learn how to save more with coupons and promo codes.",
+  openGraph: {
+    title: "Blog – Saving Tips & Guides | " + SITE_NAME,
+    description:
+      "Read SeemPromo's blog for saving tips, shopping guides, and the latest deals. Learn how to save more with coupons and promo codes.",
+    type: "website",
+  },
 };
 
 function formatDate(iso: string) {
@@ -21,10 +30,15 @@ function formatDate(iso: string) {
   }
 }
 
-export default function BlogPage() {
-  const posts = getPosts();
+export default async function BlogPage() {
+  const sanityPosts = await getSanityPosts();
+  const staticPosts = getPosts();
+  const posts = sanityPosts.length > 0 ? sanityPosts : staticPosts;
   const featured = posts[0];
-  const byCategory = BLOG_CATEGORIES.map((cat) => ({
+  const categories = sanityPosts.length > 0
+    ? [...new Set(posts.map((p) => p.category).filter(Boolean))].sort()
+    : BLOG_CATEGORIES;
+  const byCategory = categories.map((cat) => ({
     category: cat,
     posts: posts.filter((p) => p.category === cat && p.slug !== featured?.slug),
   })).filter((g) => g.posts.length > 0);
@@ -73,7 +87,7 @@ export default function BlogPage() {
                   {featured.title}
                 </h3>
                 <p className="text-rebecca text-sm mb-3">
-                  by <Link href="/" className="hover:underline">SeemPromo</Link>
+                  by <Link href="/" className="hover:underline">{(featured as { author?: string })?.author ?? "SeemPromo"}</Link>
                   {" · "}
                   <time dateTime={featured.date}>{formatDate(featured.date)}</time>
                   {" · "}
@@ -121,7 +135,7 @@ export default function BlogPage() {
                       {post.title}
                     </h3>
                     <p className="text-rebecca text-xs">
-                      by <Link href="/" className="hover:underline">SeemPromo</Link>
+                      by <Link href="/" className="hover:underline">{(post as { author?: string })?.author ?? "SeemPromo"}</Link>
                       {" · "}
                       <time dateTime={post.date}>{formatDate(post.date)}</time>
                       {" · "}

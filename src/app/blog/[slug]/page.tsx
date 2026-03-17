@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ThemeBlogLayout from "@/components/ThemeBlogLayout";
+import PortableText from "@/components/PortableText";
 import { getPostBySlug, getAllSlugs } from "@/lib/blog-posts";
+import { getSanityPostBySlug, getSanityPostSlugs } from "@/lib/sanity.blog";
 import { getStoreBlogContent } from "@/lib/store-blog-content";
 import TouchTunesPost from "../posts/TouchTunesPost";
 import StoreBlogPost from "../posts/StoreBlogPost";
@@ -16,60 +18,109 @@ import TravelGetawayPost from "../posts/TravelGetawayPost";
 import HomeGardenSavingsPost from "../posts/HomeGardenSavingsPost";
 import FashionOutdoorPost from "../posts/FashionOutdoorPost";
 
+const SITE_NAME = "SeemPromo";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://seempromo.vercel.app";
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  const sanitySlugs = await getSanityPostSlugs();
+  const staticSlugs = getAllSlugs();
+  const combined = [...new Set([...sanitySlugs, ...staticSlugs])];
+  return combined.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
+  const sanityPost = await getSanityPostBySlug(slug);
+  if (sanityPost) {
+    const { normalized, ogImageUrl } = sanityPost;
+    const title = normalized.metaTitle || normalized.title;
+    const description = normalized.metaDescription || normalized.excerpt;
+    return {
+      title: `${title} | ${SITE_NAME} Blog`,
+      description,
+      openGraph: {
+        title,
+        description,
+        type: "article",
+        images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630, alt: normalized.title }] : undefined,
+      },
+      twitter: { card: "summary_large_image", title, description },
+    };
+  }
   const post = getPostBySlug(slug);
   if (!post) return { title: "Post not found" };
   return {
-    title: post.metaTitle,
+    title: `${post.metaTitle} | ${SITE_NAME} Blog`,
     description: post.metaDescription,
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
+      type: "article",
+      images: post.featuredImage
+        ? [{ url: BASE_URL + post.featuredImage, width: 1200, height: 630, alt: post.title }]
+        : undefined,
     },
+    twitter: { card: "summary_large_image", title: post.metaTitle, description: post.metaDescription },
   };
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) notFound();
-
+  const sanityPost = await getSanityPostBySlug(slug);
+  let post: { slug: string; title: string; date: string; category: string; featuredImage: string | null; author?: string };
   let content: React.ReactNode;
-  if (slug === "stores-coupon-deals-guide-2026") {
-    content = <StoresGuidePost />;
-  } else if (slug === "seempromo-saving-tips-coupon-codes-guide-2026") {
-    content = <CouponroSavingTipsPost />;
-  } else if (slug === "touchtunes-coupon-codes-deals-discounts-2026") {
-    content = <TouchTunesPost />;
-  } else if (slug === "free-shipping-deals-guide-2026") {
-    content = <FreeShippingPost />;
-  } else if (slug === "top-deals-coupons-guide-2026") {
-    content = <DealsGuidePost />;
-  } else if (slug === "fresh-finds-saving-tips-2026") {
-    content = <FreshFindsPost />;
-  } else if (slug === "seasonal-savings-guide-2026") {
-    content = <SeasonalSavingsPost />;
-  } else if (slug === "kitchen-coffee-deals-2026") {
-    content = <KitchenCoffeePost />;
-  } else if (slug === "travel-getaway-deals-2026") {
-    content = <TravelGetawayPost />;
-  } else if (slug === "home-garden-savings-2026") {
-    content = <HomeGardenSavingsPost />;
-  } else if (slug === "fashion-outdoor-deals-2026") {
-    content = <FashionOutdoorPost />;
+
+  if (sanityPost) {
+    post = {
+      slug: sanityPost.normalized.slug,
+      title: sanityPost.normalized.title,
+      date: sanityPost.normalized.date,
+      category: sanityPost.normalized.category,
+      featuredImage: sanityPost.normalized.featuredImage,
+      author: sanityPost.normalized.author,
+    };
+    content =
+      sanityPost.body && sanityPost.body.length > 0 ? (
+        <PortableText value={sanityPost.body} />
+      ) : (
+        <p className="text-space/90">No content yet.</p>
+      );
   } else {
-    const storeContent = getStoreBlogContent(slug);
-    if (storeContent) {
-      content = <StoreBlogPost title={post.title} content={storeContent} slug={slug} />;
+    const staticPost = getPostBySlug(slug);
+    if (!staticPost) notFound();
+    post = staticPost;
+
+    if (slug === "stores-coupon-deals-guide-2026") {
+      content = <StoresGuidePost />;
+    } else if (slug === "seempromo-saving-tips-coupon-codes-guide-2026") {
+      content = <CouponroSavingTipsPost />;
+    } else if (slug === "touchtunes-coupon-codes-deals-discounts-2026") {
+      content = <TouchTunesPost />;
+    } else if (slug === "free-shipping-deals-guide-2026") {
+      content = <FreeShippingPost />;
+    } else if (slug === "top-deals-coupons-guide-2026") {
+      content = <DealsGuidePost />;
+    } else if (slug === "fresh-finds-saving-tips-2026") {
+      content = <FreshFindsPost />;
+    } else if (slug === "seasonal-savings-guide-2026") {
+      content = <SeasonalSavingsPost />;
+    } else if (slug === "kitchen-coffee-deals-2026") {
+      content = <KitchenCoffeePost />;
+    } else if (slug === "travel-getaway-deals-2026") {
+      content = <TravelGetawayPost />;
+    } else if (slug === "home-garden-savings-2026") {
+      content = <HomeGardenSavingsPost />;
+    } else if (slug === "fashion-outdoor-deals-2026") {
+      content = <FashionOutdoorPost />;
     } else {
-      notFound();
+      const storeContent = getStoreBlogContent(slug);
+      if (storeContent) {
+        content = <StoreBlogPost title={post.title} content={storeContent} slug={slug} />;
+      } else {
+        notFound();
+      }
     }
   }
 
@@ -106,7 +157,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <div className="block">
                     <h1><Link href={`/blog/${post.slug}`}>{post.title}</Link></h1>
                     <ul className="add-nav list-inline">
-                      <li>by <Link href="/">SeemPromo</Link></li>
+                      <li>by <Link href="/">{post.author ?? "SeemPromo"}</Link></li>
                       <li><time dateTime={post.date}>{formattedDate}</time></li>
                       <li><Link href="/blog">{post.category}</Link></li>
                     </ul>

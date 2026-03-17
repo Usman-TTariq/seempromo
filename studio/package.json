@@ -1,0 +1,17 @@
+{
+  "name": "seempromo-studio",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "start": "sanity start"
+  },
+  "dependencies": {
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^3.56.0",
+    "styled-components": "^6.3.11"
+  }
+}

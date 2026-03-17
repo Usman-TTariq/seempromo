@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getStores, getCoupons } from "@/lib/stores";
 import { slugify } from "@/lib/slugify";
 import { getAllSlugs } from "@/lib/blog-posts";
+import { getSanityPostSlugs } from "@/lib/sanity.blog";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://seempromo.com";
 const baseUrl = BASE.replace(/\/$/, "");
@@ -26,8 +27,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
   entries.push(...staticPages);
 
-  // --- Dynamic: blog post pages ---
-  const blogSlugs = getAllSlugs();
+  // --- Dynamic: blog post pages (Sanity + static) ---
+  let blogSlugs: string[] = [];
+  try {
+    const sanitySlugs = await getSanityPostSlugs();
+    blogSlugs = [...new Set([...sanitySlugs, ...getAllSlugs()])];
+  } catch {
+    blogSlugs = getAllSlugs();
+  }
   for (const slug of blogSlugs) {
     entries.push({
       url: `${baseUrl}/blog/${encodeURIComponent(slug)}`,
