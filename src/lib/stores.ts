@@ -23,14 +23,24 @@ function requireSupabase() {
 async function getStoresRaw(): Promise<Store[]> {
   const supabase = getSupabase();
   if (!supabase) return [];
-  const { data: rows, error } = await supabase
-    .from(SUPABASE_STORES_TABLE)
-    .select("data");
-  if (error) {
-    console.error("[stores] Supabase error:", error.message);
-    return [];
+  const PAGE_SIZE = 1000;
+  let allRows: { data: Store }[] = [];
+  let from = 0;
+  while (true) {
+    const { data: rows, error } = await supabase
+      .from(SUPABASE_STORES_TABLE)
+      .select("data")
+      .range(from, from + PAGE_SIZE - 1);
+    if (error) {
+      console.error("[stores] Supabase error:", error.message);
+      break;
+    }
+    if (!rows || rows.length === 0) break;
+    allRows = allRows.concat(rows);
+    if (rows.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
   }
-  const stores = (rows ?? [])
+  const stores = allRows
     .map((r: { data: Store }) => r.data)
     .filter(Boolean) as Store[];
   stores.sort((a, b) =>
@@ -69,17 +79,29 @@ export async function getCouponsCountFromDb(): Promise<number> {
   return typeof count === "number" ? count : 0;
 }
 
+// Supabase default max rows is 1000. Fetch in pages to get all coupons.
 export async function getCouponsRaw(): Promise<Store[]> {
   const supabase = getSupabaseCoupons();
   if (!supabase) return [];
-  const { data: rows, error } = await supabase
-    .from(SUPABASE_COUPONS_TABLE)
-    .select("id, data");
-  if (error) {
-    console.error("[coupons] Supabase error:", error.message);
-    return [];
+  const PAGE_SIZE = 1000;
+  let allRows: { id: string; data: Store | null }[] = [];
+  let from = 0;
+  while (true) {
+    const { data: rows, error } = await supabase
+      .from(SUPABASE_COUPONS_TABLE)
+      .select("id, data")
+      .range(from, from + PAGE_SIZE - 1);
+    if (error) {
+      console.error("[coupons] Supabase error:", error.message);
+      break;
+    }
+    if (!rows || rows.length === 0) break;
+    allRows = allRows.concat(rows);
+    if (rows.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
   }
-  const coupons = (rows ?? []).map((r: { id: string; data: Store | null }) => {
+  if (allRows.length === 0) return [];
+  const coupons = allRows.map((r: { id: string; data: Store | null }) => {
     const d = r?.data;
     const id = r?.id;
     if (!d || typeof d !== "object")

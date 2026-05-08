@@ -34,7 +34,7 @@ export default function HeaderPromoStrip() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/coupons?page=1&limit=6&status=all&codes_first=1")
+    fetch("/api/coupons?page=1&limit=6&status=all&codes_first=1&fresh=1")
       .then((res) => res.json())
       .then((data) => {
         if (cancelled) return;

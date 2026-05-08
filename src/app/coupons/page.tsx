@@ -41,7 +41,7 @@ function CouponsPageContent() {
       try {
         const [sRes, cRes] = await Promise.all([
           fetch("/api/stores", { cache: "no-store" }),
-          fetch(`/api/coupons?page=${page}&limit=${PER_PAGE}&status=all&codes_first=1&sort=${encodeURIComponent(sortBy)}`, { cache: "no-store" }),
+          fetch(`/api/coupons?page=${page}&limit=${PER_PAGE}&status=all&codes_first=1&sort=${encodeURIComponent(sortBy)}&fresh=1`, { cache: "no-store" }),
         ]);
         if (cancelled) return;
         const sData = await sRes.json();

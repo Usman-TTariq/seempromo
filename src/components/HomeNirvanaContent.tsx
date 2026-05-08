@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StoreLogo from "@/components/StoreLogo";
 import {
   DEFAULT_BLOG_POST_URL,
   STORES_BLOG_POST_URL,
@@ -12,6 +14,82 @@ import {
   FOOTER_TILE_BLOG_URLS,
   FOOTER_TILE_TITLES,
 } from "@/lib/blog-posts";
+import type { Store } from "@/types/store";
+
+function LatestCouponsSection() {
+  const [coupons, setCoupons] = useState<Store[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/coupons?page=1&limit=8&status=all&codes_first=1&fresh=1", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        const list: Store[] = d?.coupons ?? (Array.isArray(d) ? d : []);
+        setCoupons(list.filter((c) => c.status !== "disable"));
+      })
+      .catch(() => setCoupons([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="mb-8 sm:mb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-gray-900">Latest Coupons</h2>
+          <Link href="/coupons" className="text-sm font-medium text-[#34C759] hover:underline">View all →</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="animate-pulse bg-white rounded-xl border border-gray-200 p-4 h-28" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (coupons.length === 0) return null;
+
+  return (
+    <section className="mb-8 sm:mb-10">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-bold text-gray-900">Latest Coupons</h2>
+        <Link href="/coupons" className="text-sm font-medium text-[#34C759] hover:underline">View all →</Link>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {coupons.map((c) => {
+          const code = (c.couponCode ?? "").trim();
+          const slug = c.slug || (c.name ?? "").toLowerCase().replace(/\s+/g, "-");
+          const title = c.couponTitle?.trim() || c.description?.trim() || "Deal";
+          return (
+            <Link
+              key={c.id}
+              href={`/stores/${encodeURIComponent(slug)}`}
+              className="group bg-white rounded-xl border border-gray-200 p-4 hover:border-[#34C759]/60 hover:shadow-md transition-all flex flex-col gap-2"
+            >
+              <div className="flex items-center gap-3">
+                <StoreLogo name={c.name ?? "?"} logoUrl={c.logoUrl} size="md" rounded="lg" />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-gray-900 truncate">{c.name}</p>
+                  <p className="text-xs text-gray-500 truncate">{title}</p>
+                </div>
+              </div>
+              {code ? (
+                <div className="mt-auto flex items-center gap-2 bg-gray-50 border border-dashed border-gray-300 rounded-lg px-3 py-1.5">
+                  <span className="text-xs font-mono font-bold text-gray-800 uppercase tracking-wider truncate flex-1">{code}</span>
+                  <span className="text-[10px] font-semibold text-[#34C759] shrink-0">COPY</span>
+                </div>
+              ) : (
+                <div className="mt-auto bg-[#34C759] text-white text-xs font-semibold text-center rounded-lg py-1.5">
+                  Get Deal
+                </div>
+              )}
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 const HERO_IMGS = ["/img01.jpg", "/img03.jpg", "/img04.jpg"];
 const IMG_FULLWIDTH = "/img06.jpg";
@@ -230,6 +308,9 @@ export default function HomeNirvanaContent() {
             </div>
           </Link>
         </section>
+
+        {/* Latest Coupons from DB */}
+        <LatestCouponsSection />
 
         {/* Footer tiles – 6 images, new grid & shape */}
         <section className="rounded-2xl bg-white border border-gray-200 shadow-sm p-6 sm:p-8" aria-label="More guides">
